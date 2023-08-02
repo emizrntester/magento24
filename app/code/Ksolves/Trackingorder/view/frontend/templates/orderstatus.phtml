@@ -1,0 +1,199 @@
+<?php
+$orderdata                 = $block->getOrderData() ;
+$orderIncrementId          = $orderdata->getIncrementId();
+$date                      = $orderdata['created_at'];
+$day                       = date('l', strtotime($date));
+$month                     = date('F jS Y ',strtotime($date));
+$status                    = $orderdata['status'];
+$statusCode                = $block->getOrderStatus($status);
+$billingInfo               = $block->getBillingInfo($orderdata);
+$currency_symbol           = $block->getCurrencySymbol($orderdata);
+$productType               = $block->getOrderProductType($orderdata);
+?>
+<div class="trackingWrapper">
+
+<?php
+$shipmentId ='';
+ $shipmenttotal = $orderdata->getShipmentsCollection();
+    foreach ($shipmenttotal as $shipment) 
+    {
+        $shipmentId 		= $shipment->getId();
+    }
+    //echo $shipmentId;die;
+     $trackNumbers       	='';
+     $tracktitle ='';
+    if($shipmentId){
+		$trackCollection 	= $orderdata->getTracksCollection($shipmentId);
+							foreach ($trackCollection->getItems() as $track) {
+							      $trackNumbers = $track->getTrackNumber();
+							      $tracktitle = $track->getTitle();
+							 }
+
+
+    }
+//echo $trackNumbers;die;
+
+ ?>
+	<div class="switch" style="
+	background: linear-gradient(45deg, #ffbb1f, #ffbd1f) !important;
+	border: 0;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #000 !important;
+    margin: 20px auto;
+    line-height: normal;
+    height: auto !important;
+    padding: 7px 30px !important;
+    opacity: 1;
+    width:13%;
+    cursor: pointer;
+        text-transform: uppercase;
+        font-family: Poppins;
+    min-width: 250px;    order: 3;
+    ">
+		  	<?php
+			    		$shipmethod = $orderdata['shipping_description'];
+			    		$url='#';
+						if (strpos($shipmethod, 'Fedex') !== false) {
+						    $url = 'https://www.fedex.com/en-in/tracking.html';
+						}
+						
+						//rackCollection = $orderdata->getTracksCollection($_shipment->getId())
+						//racksCollection = $orderdata->getTracksCollection();
+
+							// foreach ($tracksCollection->getItems() as $track) {
+
+							//      $trackNumbers = $track->getTrackNumber();
+
+							// }
+							// echo $trackNumbers;
+							if($trackNumbers){
+								if (strpos($shipmethod, 'DHL Express') !== false || strpos($tracktitle, 'DHL') !== false) {
+								    $url = 'https://www.dhl.com/global-en/home/tracking/tracking-express.html?submit=1&tracking-id='.$trackNumbers;
+								}
+								// if (strpos($shipmethod, 'Fedex Express') !== false) {
+								//     $url = 'https://www.fedex.com/fedextrack/no-results-found?trknbr='.$trackNumbers;
+								// }
+								if (strpos($shipmethod, 'Aramex') !== false || strpos($tracktitle, 'Aramex') !== false) {
+								    $url = 'https://www.aramex.com/us/en/track/results?mode=0&ShipmentNumber='.$trackNumbers;
+								}
+								if (strpos($shipmethod, 'Samsa') !== false) {
+								    $url = 'https://smsaexpress.com/trackingdetails?tracknumbers%5B0%5D='.$trackNumbers;
+								}
+								if (strpos($shipmethod, 'Smsa') !== false || strpos($tracktitle, 'Smsa') !== false) {
+								    $url = 'https://smsaexpress.com/trackingdetails?tracknumbers%5B0%5D='.$trackNumbers;
+								}
+
+								if (strpos($shipmethod, 'Viva Express') !== false || strpos($tracktitle, 'Viva Express') !== false) {
+								    $url = 'https://vivaexpress.ae/tracking/?trackno='.$trackNumbers;
+								}
+
+							}
+						
+
+			    	 ?>
+			    	 <a href="<?php echo $url; ?>" style="
+			    	     display: inline-block;color: #000;width: 100%;text-align: center;line-height: 32px;" target="_blank">Track Order</a>
+			    	</div>
+	<div class="flex mb-25 w-100" >
+	    <div class="order-info-unit" >
+	    	<span class="primary-text" >Order #<?= $orderIncrementId;?> </span>
+	    	<?php if($trackNumbers){ ?>
+	    			    	<span class="primary-text" >Tracking # #<?= $trackNumbers;?></span>
+
+	    	<?php } ?>
+	    </div>
+	   <div class="order-info-unit d-flex align-center flex-column">
+	   		<p><span class="primary-text" >Order Status:</span><span class="result_data d-block"> #<?= $statusCode;?></span></p>
+		    <p><span class="primary-text" >Courier:</span> <span class="result_data d-block"><?= $orderdata['shipping_description'];?></span> </p>
+	   </div>
+	     <div class="order-info-unit" ><span class="primary-text text-center" >Order Date:</span><span class="result_data d-block"> #<?= $month;?></span></div>
+	     
+
+	</div>
+    <div class="mb-25 order-step-outer">
+	    <div class="justify-content-between progress-bar ">
+		   <div class="order-stepwizard-step">
+		   	<?php //echo  $orderdata['state']; ?>
+		    	<?php if($status == 'pending' || $status == 'STATE_OPEN' || $status == 'paypal_canceled_reversal') { ?>
+			    <div class="order-stepwizard-img-set" >
+				    <div class="order-stepwizard-img active">
+				    	<img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/basket-white.svg'); ?>" alt="order-track" /></div>
+				    </div>
+			    	<p><span class="d-none-mobile" >Items</span> Ordered</p>
+				<?php  } else { ?>
+				 <p><span class="" >In Process</span></p>
+			    <div class="order-stepwizard-img active">
+		           <!-- <img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/basket.svg'); ?>" alt="order-track" /> -->
+		           <i class="fa fa-check"></i>
+		            </div>
+		         
+				<?php  } ?>
+			</div>
+			<div class="order-stepwizard-step">
+				<?php if($status == 'processing_delivered' || $status == 'processing' ||  $status == 'pending_payment' || $status == 'payment_review' || $status == 'pending_paypal' || $status == 'complete') { ?>
+					<div class="order-stepwizard-img-set" >
+		        	<p><span class="d-none-mobile" ></span> Shipped</p>
+			    <div class="order-stepwizard-img active">
+			    	<!-- <img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/order-processing-white.svg'); ?>" alt="order-track" /> -->
+			    	<i class="fa fa-check"></i>
+		    	</div>
+			    </div>
+		    
+		   
+		         
+				<?php  } ?>
+			</div>
+			<?php if($status == 'holded') { ?>
+			<div class="order-stepwizard-step">		
+		    <div class="order-stepwizard-img-set" >
+			    <div class="order-stepwizard-img active">
+			    	<img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/order-holded-white.svg'); ?>" alt="order-track" /></div>
+			    </div>
+		    	<p><span class="d-none-mobile" >Order</span> Holded</p>
+			</div>
+			<?php  } 
+			if($status == 'canceled') { ?>
+			<div class="order-stepwizard-step">
+
+		    <div class="order-stepwizard-img-set" >
+			    <div class="order-stepwizard-img active">
+			    	<img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/order-cancel-white.svg'); ?>" alt="order-track" /></div>
+			    </div>
+		    	<p><span class="d-none-mobile" >Order</span> Cancelled</p>
+
+			</div>
+				<?php  } ?>
+			<div class="order-stepwizard-step <?php echo $orderdata['state']; ?>">
+				<?php if($status == 'processing_delivered' || $status =='complete_delivered') { ?>
+		    <div class="order-stepwizard-img-set" >
+		        	<p><span class="d-none-mobile" ></span> Delivered</p>
+			    <div class="order-stepwizard-img active">
+			    	<!-- <img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/order-complete-white.svg'); ?>" alt="order-track" /> -->
+			    	<i class="fa fa-check"></i>
+		    	</div>
+			    </div>
+		    
+				<?php  } else { ?>
+				  <p><span class="d-none-mobile" ></span> Delivered</p>
+		     <div class="order-stepwizard-img active">
+<!-- 			    	<img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/order-complete-white.svg'); ?>" alt="order-track" />
+ -->		    	</div>
+				<?php  } ?>
+			</div>
+			
+		</div>
+	</div>
+		 
+			    	 
+
+</div>     
+         
+<script>
+    require([
+        'jquery',
+        'tabs'], function ($) {
+        $("#element").tabs();
+    });
+</script>

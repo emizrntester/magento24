@@ -1,0 +1,303 @@
+<!--
+/**
+ * @author Ksolves Team
+ * @copyright Copyright (c) 2020 Ksolves (https://www.ksolves.com)
+ * @package Ksolves_Trackingorder
+ */
+-->
+<?php
+$buttonColor        = $block->getButtonColor();
+$buttonText         = $block->getButtonText();
+$moduleStatus       = $block->getModuleStatus();
+$buttonTextColor    = $block->getButtonTextColor();
+if ($moduleStatus == 0) {
+    $result='<h1 class="font-weight-bold mb-0 text-center" style="color:red">Sorry <h1>';
+    $result.='<h2 class="font-weight-bold mb-0 text-center" style="color:red">Your Extension is disable.<h2>';
+    $result.='<br><h2 class="font-weight-bold mb-0 text-center" style="color:green"> Please enable the Extension.</h2>';
+    echo $result;
+} else {
+    ?>
+ <style type="text/css">
+  button.primary-btn {
+    background-color: <?=$buttonColor ?>;
+    color: <?=$buttonTextColor ?>;
+    border: 1px solid <?=$buttonColor ?>;
+    box-shadow: none;
+    border-radius: 2px;
+    transition: 0.3s ease-in-out;
+  }
+
+  button.primary-btn:hover {
+    background: transparent;
+    color: <?=$buttonColor ?>;
+  }
+  #check-order-msg  {
+    color:red;
+  }
+  #check-email-msg {
+    color:red;
+  }
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,800i,800&display=swap');
+/*  new form update css ====================================  */
+body.trackingorder-index-index .page-title-wrapper {background: #26436a;text-align: center;color: #fff;}
+body.trackingorder-index-index  .page-main > .page-title-wrapper .page-title {color: #fff;text-transform: uppercase;border: 0;font-family: Poppins;padding: 0;}
+.trackingorder-index-index  .luma-form.flex {box-shadow: none;width: 100%;justify-content: center;max-width: 100%;}
+.trackingorder-index-index .luma-form.flex .luma-form-right {background: #fff;text-align: center;}
+.trackingorder-index-index form#track-order input {background: #dcdddd;color: #000;font-weight: 400;text-align: center;border-radius: 50px;font-family: Poppins;font-size: 16px;}
+.trackingorder-index-index form#track-order input::placeholder {color: #000;font-size:16px}
+.trackingorder-index-index form#track-order{font-family: Poppins;width: 100%;padding: 30px 0;margin: 0 auto;display: block;max-width: 500px;}
+.trackingorder-index-index form#track-order .primary-btn {
+    background: linear-gradient(45deg, #ffbb1f, #ffbd1f);
+    border-color: #ffbb1f;
+    color: #000;
+    font-family: Poppins;
+    min-width: 250px;
+    line-height: 46px;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+}
+.trackingorder-index-index form#track-order fieldset.fieldset {margin-bottom: 23px;}
+
+.trackingWrapper .order-info-unit {
+    border-width:  0px;
+   padding: 15px;
+}
+.trackingWrapper {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+}
+.trackingWrapper .order-info-unit .primary-text {
+    display: block;
+    color: #737373;
+    font-size: 16px;
+}
+.order-stepwizard-step p {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+}
+.w-100{width:100%;flex: 0 0 100%;max-width: 100%;display: flex;justify-content: space-between;border-color: #cdd6df;border-width: 2px 0px 2px 0px; border-style: solid;}
+.column.main {
+    position: relative;
+}
+.error {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    color: red;
+    font-weight: 600;
+    transform: translate(-50%, -50%);
+}
+.order-info-unit > p {
+    display: flex;
+    margin: 0;    justify-content: center;
+}
+
+span.result_data.d-block {
+    font-weight: bold;
+    font-size: 16px;
+}
+.text-center{text-align: center;}
+.order-stepwizard-img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border: 2px solid #bfbebe;
+    padding: 3px 3px;
+    background: #f3f3f3;
+    position: relative;
+    line-height: 56px;
+    z-index: 1;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+i.fa.fa-check {
+    border-radius: 50px;
+    background: #bfbebe;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 0;
+    justify-content: center;
+}
+.order-stepwizard-img.active i.fa.fa-check {
+    opacity: 1;
+    font-size: 20px;
+    background: #3be23b;
+}
+.order-stepwizard-img.active {
+    background: #f3f3f3;
+    border-color: #bfbebe;
+}
+.progress-bar:before {
+    background: #fff;
+    width: calc(100% - 8%);
+    left: 50%;
+    transform: translatex(-50%);
+    height: 8px;
+    border: 2px solid #bdbaba;
+    top: 45px;
+}
+.order-step-outer {
+    background: #FFF;
+    padding: 0;
+}
+.flex-column{flex-flow: column;}
+.d-flex{display: flex;}
+.align-center{align-content: center;}
+
+@media(max-width : 767px){
+    
+.block.block-search.algolia-search-block .block.block-content form {
+    width: 100%;
+}
+
+#algolia-searchbox .magnifying-glass {
+    top: 50%;
+    bottom: auto;
+    transform: translatey(-50%);
+}
+
+}
+
+@media(max-width : 640px){
+  
+.justify-content-between.progress-bar {
+    margin:  0 10px;
+}
+
+.order-stepwizard-img {
+    width: 40px;
+    height: 40px;
+}
+.order-stepwizard-step p{font-size:14px;}
+i.fa.fa-check {
+    height: 30px;
+    width: 30px;
+}
+.trackingWrapper .order-info-unit, .trackingWrapper .order-info-unit .primary-text.text-center, .order-info-unit > p {
+    width: 100%;
+    text-align: left !important;
+    justify-content: left;
+    padding: 5px 0px;
+}
+}
+</style>
+<div class="bt_trackorder" id="showInfo"></div>
+<div class="luma-form flex" style="margin-bottom: 50px;" >
+  <!-- <div class="luma-form-left flex-center flex-column" >
+      <img src="<?= $this->getViewFileUrl('Ksolves_Trackingorder::images/Icon.svg'); ?>" class="luma-track-order-img" alt="order-truck">
+      <h2 class="font-weight-bold mb-0" >Track your Order</h2>
+  </div> -->
+  <div class="luma-form-right" >
+    <form  id="track-order" name="track-order" action="<?= $block->getBaseUrl().'trackingorder/index/search'; ?>" class="luma-form-outer" method="post" enctype='multipart/form-data'  data-mage-init='{"validation": {}}'>
+      <fieldset class="fieldset">
+          <div class="field order_id">
+              <div class="control mb-25">
+                  <!-- <label class="luma-form-label" >Order ID</label> -->
+                  <input class="luma-form-field" name="order_id" id="orderId" type="text" placeholder="Enter Order Number" autocomplete="off" data-validate="{required:true}">
+                  <span id="check-order-msg" ></span>
+              </div>
+          </div>
+          <?php 
+          $om = \Magento\Framework\App\ObjectManager::getInstance();
+          $customerSession = $om->get('Magento\Customer\Model\Session');
+          $emails = '';
+          if($customerSession->isLoggedIn()) {
+       
+              $emails = $customerSession->getCustomer()->getEmail();
+
+            }  
+            if($emails){ ?>
+            <input class="" name="email_address" id="emailAddress"  type="hidden" value="<?php echo $emails; ?>" >
+         <?php    }else{
+
+
+          ?>
+          <div class="field email_address">
+              <div class="control">
+                <!--  <label class="luma-form-label" >Email </label> -->
+                  <input class="luma-form-field" name="email_address" id="emailAddress"  type="text" placeholder="Enter Email Address " autocomplete="off" data-validate="{required:true, 'validate-email':true}">
+                  <span id="check-email-msg" ></span>
+              </div>
+          </div>
+        <?php  } ?>
+      </fieldset>
+      <div class="actions-toolbar text-center">
+<!--             <button class="primary-btn" type="submit" title="Submit" id="submit">Search</button>
+ -->      
+ 
+                   <span class="primary-btn" id="but">Search</span>
+
+      </div>
+    </form>
+  </div>
+</div>
+<div id="resultdata">
+  
+
+
+</div>
+
+<div class="error"></div>
+<?php } ?>
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui'], function($){
+      $(document).ready(function(){        
+  
+            jQuery('#but').on('click', function() {
+            var url = "<?= $this->getBaseUrl() ?>";
+              var new_url = url+'trackingorder/index/search';
+              var email_address = jQuery('#emailAddress').val();
+              var order_id = jQuery('#orderId').val();
+              if(order_id == '' || email_address == ''){
+                   $('.error').html("Please enter Email and Order id");
+              }else{
+                  $('.error').html('');
+
+                  $.ajax({
+                    url: new_url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        email_address: email_address,
+                        order_id: order_id,
+                    },
+                complete: function(response) {
+                  console.log(response);
+                   var str = JSON.parse(response.responseText);
+
+                   console.log(str);
+                   if(str.html){
+                    $('#resultdata').html(str.html);
+                  }else{
+                     $('#resultdata').html('');
+                    $('.error').html(str.errormsg);
+                  }
+                    
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.log('Error happens. Try again.');
+                    }
+                });
+
+              }
+              
+          
+        });
+
+          var value ="<?php echo $buttonText;?>";
+          $("#submit").text(value);
+      });
+    });
+</script>
+
