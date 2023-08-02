@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Emizentech::top_level" title="Emizentech" module="Emizentech_Freeshippingbar" sortOrder="9999" resource="Magento_Backend::content"/>
+		<add id="Emizentech_Freeshippingbar::emizentech_freeshippingbar_shippingbar" title="Shippingbar" module="Emizentech_Freeshippingbar" sortOrder="9999" resource="Magento_Backend::content" parent="Emizentech::top_level" action="emizentech_freeshippingbar/shippingbar/index"/>
+	</menu>
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route url="/V1/emizentech-freeshippingbar/shippingbar" method="POST">
+		<service class="Emizentech\Freeshippingbar\Api\ShippingbarRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Emizentech_Freeshippingbar::Shippingbar_save"/>
+		</resources>
+	</route>
+	<route url="/V1/emizentech-freeshippingbar/shippingbar/search" method="GET">
+		<service class="Emizentech\Freeshippingbar\Api\ShippingbarRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Emizentech_Freeshippingbar::Shippingbar_view"/>
+		</resources>
+	</route>
+	<route url="/V1/emizentech-freeshippingbar/shippingbar/:shippingbarId" method="GET">
+		<service class="Emizentech\Freeshippingbar\Api\ShippingbarRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Emizentech_Freeshippingbar::Shippingbar_view"/>
+		</resources>
+	</route>
+	<route url="/V1/emizentech-freeshippingbar/shippingbar/:shippingbarId" method="PUT">
+		<service class="Emizentech\Freeshippingbar\Api\ShippingbarRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Emizentech_Freeshippingbar::Shippingbar_update"/>
+		</resources>
+	</route>
+	<route url="/V1/emizentech-freeshippingbar/shippingbar/:shippingbarId" method="DELETE">
+		<service class="Emizentech\Freeshippingbar\Api\ShippingbarRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Emizentech_Freeshippingbar::Shippingbar_delete"/>
+		</resources>
+	</route>
+</routes>

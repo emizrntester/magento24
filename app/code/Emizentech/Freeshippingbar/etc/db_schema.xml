@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="emizentech_freeshippingbar_shippingbar" resource="default" engine="innodb" comment="emizentech_freeshippingbar_shippingbar Table">
+		<column xsi:type="int" name="shippingbar_id" padding="10" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="shippingbar_id"/>
+		</constraint>
+		<column name="name" nullable="true" xsi:type="text" comment="name"/>
+		<column name="status" nullable="true" xsi:type="smallint" comment="status" identity="true"/>
+		
+		<column name="priority" nullable="true" xsi:type="text" comment="priority"/>
+		<column name="store_views" nullable="true" xsi:type="int" comment="store_views" identity="false"/>
+		<column name="customer_groups" nullable="true" xsi:type="text" comment="customer_groups"/>
+		<column name="from_date" nullable="true" xsi:type="date" comment="from_date"/>
+		<column name="to_date" nullable="true" xsi:type="date" comment="to_date"/>
+		<column name="goal" nullable="true" xsi:type="float" comment="Enter the free shipping threshold. Buyers whose orders reach this amount will receive delivery for free"/>
+		<column name="first_message" nullable="true" xsi:type="text" comment="Enter the initial message in the free shipping bar displayed to buyers"/>
+		<column name="below_goal_message" nullable="true" xsi:type="text" comment="Enter the second message when buyers' orders haven't reached the goal"/>
+		<column name="achieve_message" nullable="true" xsi:type="text" comment="Enter the congratulation message when buyers' orders reach the goal"/>
+		<column name="clickable" nullable="true" xsi:type="text" comment="If Yes, the bar can be clicked to link to a different URL"/>
+		<column name="open_new_page" nullable="true" xsi:type="text" comment="Select Yes to open the link in a new tab"/>
+		<column name="position" nullable="true" xsi:type="varchar" comment="position" length="255"/>
+		<column name="allowshow" nullable="true" xsi:type="varchar" comment="allowshow" length="255"/>
+		<column name="exclude_pages" nullable="true" xsi:type="text" comment=" Enter handle name(s) of page(s) NOT to display free shipping bars. Page(s) are separated by line breaks."/>
+	</table>
+</schema>

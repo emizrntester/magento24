@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route id="mpfreeshippingbar" frontName="mpfreeshippingbar">
+			<module name="Emizentech_Freeshippingbar" before="Magento_Backend"/>
+		</route>
+		<route frontName="emizentech_freeshippingbar" id="emizentech_freeshippingbar">
+			<module before="Magento_Backend" name="Emizentech_Freeshippingbar"/>
+		</route>
+	</router>
+</config>

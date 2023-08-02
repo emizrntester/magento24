@@ -1,0 +1,22 @@
+{
+    "name": "emizentech/module-freeshippingbar",
+    "description": "Based on the customer's current shopping cart total,  Emizentech Free Shipping Bar Magento 2 will automatically calculate and show a relevant message to the buyer. There are three standard messages which match three shopping phases:",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Mage2Gen",
+            "email": "info@mage2gen.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Emizentech\\Freeshippingbar\\": ""
+        }
+    }
+}
